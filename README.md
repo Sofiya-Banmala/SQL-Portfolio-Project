@@ -10,7 +10,6 @@ This project demonstrates an end-to-end analytics pipeline using SQL and Power B
 - Power BI (Data Visualization)
 - DAX (Data Analysis Expressions)
 - Power Query
-- Microsoft Excel (for supplementary calculations if required)
 
 ---
 
