@@ -36,9 +36,11 @@ SELECT * FROM [Product_Sales_2016]
 UNION
 SELECT * FROM [Product_Sales_2017];
 
-2. Net Revenue Calculation
+### 2. Net Revenue Calculation
 
 A view was created to calculate the net revenue for each customer and product combination.
+
+```sql
 CREATE VIEW client_revenue AS
 SELECT 
   CAST(SUM((s.OrderQuantity * p.productprice) - (s.OrderQuantity * p.productcost)) AS DECIMAL(19,2)) AS NetRevenue,
@@ -50,6 +52,8 @@ GROUP BY productname, s.CustomerKey, s.orderdate, p.modelname, p.ProductKey;
 3. Cohort Analysis
 
 The cohort year for each customer was determined based on their first purchase year. This was used to analyze customer retention.
+
+```sql
 WITH cohort_year AS (
   SELECT DISTINCT
     YEAR(MIN(orderdate) OVER (PARTITION BY customerkey)) AS cohort_year,
@@ -69,6 +73,7 @@ GROUP BY YEAR(cr.orderdate), cy.cohort_year;
 
 Customers were segmented into high, medium, and low value groups using the PERCENTILE_CONT() function.
 
+```sql
 WITH get_customer_revenue AS (
   SELECT modelname, customerkey, SUM(netrevenue) AS netrevenue
   FROM client_revenue
@@ -99,6 +104,7 @@ GROUP BY customer_segment;
 
 Churned customers were defined as those who had not made a purchase in the last six months. The most recent order date per customer was used to define their status.
 
+```sql
 WITH getlastpurchase AS (
   SELECT 
     ROW_NUMBER() OVER (PARTITION BY customerkey ORDER BY CAST(orderdate AS DATE) DESC) AS rn,
