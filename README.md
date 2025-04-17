@@ -51,7 +51,7 @@ LEFT JOIN products AS p ON s.ProductKey = p.ProductKey
 GROUP BY productname, s.CustomerKey, s.orderdate, p.modelname, p.ProductKey;
 ```
 
-3. Cohort Analysis
+### 3. Cohort Analysis
 
 The cohort year for each customer was determined based on their first purchase year. This was used to analyze customer retention.
 
@@ -72,7 +72,7 @@ LEFT JOIN cohort_year AS cy ON cr.CustomerKey = cy.CustomerKey
 GROUP BY YEAR(cr.orderdate), cy.cohort_year;
 ```
 
-4. Customer Segmentation
+### 4. Customer Segmentation
 
 Customers were segmented into high, medium, and low value groups using the PERCENTILE_CONT() function.
 
@@ -104,7 +104,7 @@ FROM segment_summary
 GROUP BY customer_segment;
 ```
 
-5. Churn Calculation
+### 5. Churn Calculation
 
 Churned customers were defined as those who had not made a purchase in the last six months. The most recent order date per customer was used to define their status.
 
@@ -148,12 +148,6 @@ The Power BI dashboard was built using the transformed data outputs from SQL. It
   - Total Customers
   - Churn Rate
 
-- **Optional: Monthly Revenue Trend**  
-  A line or area chart showing how revenue has changed over time. This was built using a calculated `MonthYear` column derived from `orderdate`:
-  
-  ```DAX
-  MonthYear = FORMAT(churndate[orderdate], "MMM YYYY")
-  MonthYearSort = FORMAT(churndate[orderdate], "YYYYMM")
 
 Business Insights
 
