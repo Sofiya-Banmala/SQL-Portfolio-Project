@@ -49,6 +49,7 @@ SELECT
 FROM sales AS s
 LEFT JOIN products AS p ON s.ProductKey = p.ProductKey
 GROUP BY productname, s.CustomerKey, s.orderdate, p.modelname, p.ProductKey;
+```
 
 3. Cohort Analysis
 
@@ -69,6 +70,7 @@ INTO cohort_analysis
 FROM client_revenue AS cr
 LEFT JOIN cohort_year AS cy ON cr.CustomerKey = cy.CustomerKey
 GROUP BY YEAR(cr.orderdate), cy.cohort_year;
+```
 
 4. Customer Segmentation
 
@@ -100,6 +102,7 @@ SELECT customer_segment, SUM(netrevenue) AS netrevenue
 INTO customer_segmentation
 FROM segment_summary
 GROUP BY customer_segment;
+```
 
 5. Churn Calculation
 
@@ -120,6 +123,7 @@ SELECT *,
 INTO churndate
 FROM getlastpurchase
 WHERE rn = 1;
+```
 
 ## Power BI Dashboard Overview
 
