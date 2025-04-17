@@ -35,6 +35,7 @@ UNION
 SELECT * FROM [Product_Sales_2016]
 UNION
 SELECT * FROM [Product_Sales_2017];
+```
 
 ### 2. Net Revenue Calculation
 
